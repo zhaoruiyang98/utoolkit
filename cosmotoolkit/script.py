@@ -7,6 +7,7 @@ from typing import cast
 from cosmotoolkit.cover import Cover
 from cosmotoolkit.log import LoggedError
 from cosmotoolkit.log import setup_logging
+from cosmotoolkit.subtitles import VTTConvertor
 
 
 def get_parser():
@@ -68,7 +69,7 @@ def main():
             Cover(args.file, args.output, args.force, args.extension).run()
         elif args.subcommand == "sub":
             args = cast(SubNameSpace, args)
-            pass
+            VTTConvertor(args.file, args.output, args.force).run()
         else:
             parser.print_help()
     except LoggedError:
