@@ -34,6 +34,10 @@ def get_parser():
         "-o", "--output", help="output file path", default="")
     sub_parser.add_argument(
         "-f", "--force", help="force overwrite", action="store_true")
+    sub_parser.add_argument(
+        "-t", "--duration",
+        help="remove events short than x milliseconds", default=100
+    )
 
     return parser
 
@@ -49,6 +53,7 @@ class SubNameSpace(Namespace):
     file: str
     output: str
     force: bool
+    duration: int
 
 
 def main():
@@ -69,7 +74,7 @@ def main():
             Cover(args.file, args.output, args.force, args.extension).run()
         elif args.subcommand == "sub":
             args = cast(SubNameSpace, args)
-            VTTConvertor(args.file, args.output, args.force).run()
+            VTTConvertor(args.file, args.output, args.force, args.duration).run()
         else:
             parser.print_help()
     except LoggedError:

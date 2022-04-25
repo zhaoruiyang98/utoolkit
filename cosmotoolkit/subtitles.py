@@ -22,6 +22,15 @@ def fix_weird_chars(ssa: SSAFile) -> SSAFile:
     return ssa
 
 
+def remove_short_events(ssa: SSAFile, duration: int = 100) -> SSAFile:
+    new_events: list[SSAEvent] = []
+    for event in ssa.events:
+        if event.duration >= duration:
+            new_events.append(event)
+    ssa.events = new_events
+    return ssa
+
+
 class RegularText:
     pattern = re.compile(r"(<c>)|(</c>)|(<\d\d:\d\d:\d\d.\d\d\d>)")
     space = re.compile(r'\x20+')
@@ -84,6 +93,7 @@ class VTTConvertor(HasLogger):
     file: str
     output: str = ""
     force: bool = False
+    duration: int = 100
 
     def __post_init__(self):
         self.set_logger(self.__class__.__name__)
@@ -109,4 +119,5 @@ class VTTConvertor(HasLogger):
         ssa = self.load()
         ssa = fix_weird_chars(ssa)
         ssa = merge_duplicates(ssa)
+        ssa = remove_short_events(ssa, self.duration)
         ssa.save(self.output)
