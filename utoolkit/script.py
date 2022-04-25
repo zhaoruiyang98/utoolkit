@@ -4,14 +4,14 @@ import logging
 import sys
 from argparse import Namespace
 from typing import cast
-from cosmotoolkit.cover import Cover
-from cosmotoolkit.log import LoggedError
-from cosmotoolkit.log import setup_logging
-from cosmotoolkit.subtitles import VTTConvertor
+from utoolkit.cover import Cover
+from utoolkit.log import LoggedError
+from utoolkit.log import setup_logging
+from utoolkit.subtitles import VTTConvertor
 
 
 def get_parser():
-    parser = argparse.ArgumentParser(description='cosmotoolkit')
+    parser = argparse.ArgumentParser(description='utoolkit')
     parser.add_argument('-v', '--verbose', action='count', default=0)
     subparsers = parser.add_subparsers(
         title="subcommands",

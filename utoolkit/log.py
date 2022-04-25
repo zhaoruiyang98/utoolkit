@@ -46,7 +46,7 @@ class CustomFormatter(Formatter):
 
 
 def get_logger(name: str) -> Logger:
-    if name.startswith('cosmotoolkit.'):
+    if name.startswith('utoolkit.'):
         name = name.split('.')[-1]
     return logging.getLogger(name)
 

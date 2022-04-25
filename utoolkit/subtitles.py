@@ -12,8 +12,8 @@ from pysubs2 import SSAEvent
 from pysubs2 import SSAFile
 from pysubs2 import UnknownFPSError
 from pysubs2 import UnknownFormatIdentifierError
-from cosmotoolkit.log import HasLogger
-from cosmotoolkit.log import LoggedError
+from utoolkit.log import HasLogger
+from utoolkit.log import LoggedError
 
 
 def fix_weird_chars(ssa: SSAFile) -> SSAFile:

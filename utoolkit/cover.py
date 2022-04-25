@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from pathlib import Path
 from PIL import Image
-from cosmotoolkit.log import HasLogger
-from cosmotoolkit.log import LoggedError
+from utoolkit.log import HasLogger
+from utoolkit.log import LoggedError
 
 
 @dataclass

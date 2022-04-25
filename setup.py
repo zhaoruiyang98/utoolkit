@@ -26,22 +26,22 @@ classifiers = [
 ]
 
 setup(
-    name='cosmotoolkit',
+    name='utoolkit',
     version='0.0.1',
-    description='toolkit',
+    description='toolkit for processing youtube files',
+    long_description=read_long_description(),
     author='',
     author_email='',
     license='MIT',
     python_requires='>=3.9',
-    keywords='cosmology perturbation EFT',
     packages=packages,
     install_requires=install_requires,
     package_data={
-        'cosmotoolkit': ['py.typed']
+        'utoolkit': ['py.typed']
     },
     entry_points={
         'console_scripts': [
-            'cosmotoolkit=cosmotoolkit.script:main',
+            'utoolkit=utoolkit.script:main',
         ],
     },
     classifiers=classifiers,
