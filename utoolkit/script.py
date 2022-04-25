@@ -37,7 +37,7 @@ def get_parser():
         "-f", "--force", help="force overwrite", action="store_true")
     sub_parser.add_argument(
         "-t", "--duration",
-        help="remove events short than x milliseconds", default=100
+        help="remove events short than x milliseconds", default=100, type=int,
     )
 
     return parser
