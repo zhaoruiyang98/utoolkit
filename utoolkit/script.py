@@ -11,7 +11,8 @@ from utoolkit.subtitles import VTTConvertor
 
 
 def get_parser():
-    parser = argparse.ArgumentParser(description='utoolkit')
+    parser = argparse.ArgumentParser(
+        description='toolkit for processing youtube files')
     parser.add_argument('-v', '--verbose', action='count', default=0)
     subparsers = parser.add_subparsers(
         title="subcommands",
