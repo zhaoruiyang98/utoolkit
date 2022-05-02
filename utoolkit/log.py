@@ -1,5 +1,6 @@
 from __future__ import annotations
 import logging
+import re
 from logging import Formatter
 from logging import Logger
 
@@ -31,12 +32,20 @@ class CustomFormatter(Formatter):
     def __init__(self, fmt: str = "%(levelname)-8s: %(message)s"):
         super().__init__()
         self.fmt = fmt
+        pattern = re.compile(r'%\(levelname\).*?:')
+        match = pattern.match(fmt)
+        if not match:
+            raise ValueError("fmt must start with '%(levelname)'")
+        end = match.end()
+
+        def insert_color(s: str, color: str) -> str:
+            return color + s[:end] + self.reset + s[end:]
         self.FORMATS = {
-            logging.DEBUG: self.grey + self.fmt + self.reset,
-            logging.INFO: self.blue + self.fmt + self.reset,
-            logging.WARNING: self.yellow + self.fmt + self.reset,
-            logging.ERROR: self.red + self.fmt + self.reset,
-            logging.CRITICAL: self.bold_red + self.fmt + self.reset
+            logging.DEBUG: insert_color(fmt, self.grey),
+            logging.INFO: insert_color(fmt, self.blue),
+            logging.WARNING: insert_color(fmt, self.yellow),
+            logging.ERROR: insert_color(fmt, self.red),
+            logging.CRITICAL: insert_color(fmt, self.bold_red),
         }
 
     def format(self, record):
