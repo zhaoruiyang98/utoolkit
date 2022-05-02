@@ -28,6 +28,14 @@ def get_parser():
         "-f", "--force", help="force overwrite", action="store_true")
     cover_parser.add_argument(
         "-ext", "--extension", help="output file extension", default="jpeg")
+    cover_parser.add_argument(
+        "-k", "--keep", help="keep original ratio", action="store_true")
+    cover_parser.add_argument(
+        "--width", help="output width", type=int, default=1146)
+    cover_parser.add_argument(
+        "--height", help="output height", type=int, default=717)
+    cover_parser.add_argument(
+        "-pad", "--padding", help="add black padding", action="store_true")
 
     sub_parser = subparsers.add_parser("sub", help="process subtitles")
     sub_parser.add_argument("file", help="input file path")
@@ -48,6 +56,10 @@ class CoverNameSpace(Namespace):
     output: str
     force: bool
     extension: str
+    keep: bool
+    width: int
+    height: int
+    padding: bool
 
 
 class SubNameSpace(Namespace):
@@ -72,7 +84,9 @@ def main():
     try:
         if args.subcommand == "cover":
             args = cast(CoverNameSpace, args)
-            Cover(args.file, args.output, args.force, args.extension).run()
+            Cover(file=args.file, output=args.output, force=args.force,
+                  extension=args.extension, keep=args.keep, width=args.width,
+                  height=args.height, padding=args.padding).run()
         elif args.subcommand == "sub":
             args = cast(SubNameSpace, args)
             VTTConvertor(args.file, args.output, args.force, args.duration).run()
